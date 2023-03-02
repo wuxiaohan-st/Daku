@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 05/01/2023 09:43:39
+ Date: 23/02/2023 22:16:48
 */
 
 SET NAMES utf8mb4;
@@ -34,7 +34,7 @@ CREATE TABLE `approve`  (
   `approve_time` datetime NULL DEFAULT NULL COMMENT '表示该节点完成审批的时间',
   `approve_suggestion` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '代表该节点的审批意见，非必填',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 200 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '审批流程表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 210 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '审批流程表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of approve
@@ -81,6 +81,10 @@ INSERT INTO `approve` VALUES (197, 'CK20740498', 0, 1, 51, 6, 29, 3, 1, '2022-11
 INSERT INTO `approve` VALUES (198, 'CK21824', 0, 1, 51, 6, 58, 1, 1, '2022-11-24 02:57:10', '');
 INSERT INTO `approve` VALUES (199, 'CK21824', 0, 1, 51, 6, 52, 2, 1, '2022-11-24 02:57:25', '');
 INSERT INTO `approve` VALUES (200, 'CK21824', 0, 1, 51, 6, 29, 3, 1, '2022-11-24 02:57:47', '');
+INSERT INTO `approve` VALUES (204, 'JY2023022315165736', 0, 2, 51, 6, NULL, 1, 0, NULL, NULL);
+INSERT INTO `approve` VALUES (205, 'JY2023022315233657', 0, 2, 51, 6, NULL, 1, 0, NULL, NULL);
+INSERT INTO `approve` VALUES (211, 'CK111000', 5, 1, 51, 6, 52, 1, 1, '2023-02-23 09:33:46', NULL);
+INSERT INTO `approve` VALUES (212, 'CK111000', 5, 1, 51, 6, NULL, 2, 0, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for approve_process
@@ -92,7 +96,7 @@ CREATE TABLE `approve_process`  (
   `approve_node` int NOT NULL,
   `role_id` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of approve_process
@@ -113,6 +117,9 @@ INSERT INTO `approve_process` VALUES (13, 2, 4, 4);
 INSERT INTO `approve_process` VALUES (14, 2, 5, 6);
 INSERT INTO `approve_process` VALUES (15, 3, 1, 8);
 INSERT INTO `approve_process` VALUES (16, 4, 1, 7);
+INSERT INTO `approve_process` VALUES (17, 5, 1, 2);
+INSERT INTO `approve_process` VALUES (18, 5, 2, 3);
+INSERT INTO `approve_process` VALUES (19, 5, 3, 6);
 
 -- ----------------------------
 -- Table structure for borrow_document
@@ -128,11 +135,13 @@ CREATE TABLE `borrow_document`  (
   `document_status` int NULL DEFAULT NULL COMMENT '文件状态',
   `description` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '借用单单据信息' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 44 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '借用单单据信息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of borrow_document
 -- ----------------------------
+INSERT INTO `borrow_document` VALUES (42, 'JY2023022315165736', 51, '2023-02-23 15:18:24', '123', 0, 1, '1234567');
+INSERT INTO `borrow_document` VALUES (43, 'JY2023022315233657', 51, '2023-02-24 00:00:00', '123333', 0, 1, '2133333');
 
 -- ----------------------------
 -- Table structure for check_repair_category
@@ -185,7 +194,7 @@ CREATE TABLE `check_repair_document`  (
   `description` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `document_status` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '报检报修单单据信息' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '报检报修单单据信息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of check_repair_document
@@ -225,7 +234,7 @@ CREATE TABLE `department_system`  (
   `department_id` int UNSIGNED NOT NULL,
   `system_id` int UNSIGNED NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of department_system
@@ -252,7 +261,7 @@ CREATE TABLE `device`  (
   `lend_number` int NOT NULL COMMENT '设备借出数量',
   `outwarehouse_number` int NOT NULL COMMENT '设备出库数量',
   `scrap_number` int NOT NULL COMMENT '设备报废数量',
-  `category_id` int NULL DEFAULT NULL COMMENT '设备类别id，1为工具类，2为设备类，3为材料类，4为报废类，5为专用类，6为固定资产类',
+  `category_id` int NOT NULL COMMENT '设备类别id，1为工具类，2为设备类，3为材料类，4为报废类，5为专用类，6为固定资产类',
   `fund_id` int NULL DEFAULT NULL COMMENT '经费来源',
   `location` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '设备位置信息',
   `amount_unit` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '设备单位',
@@ -268,7 +277,7 @@ CREATE TABLE `device`  (
 -- ----------------------------
 -- Records of device
 -- ----------------------------
-INSERT INTO `device` VALUES (11, 'sssssssss', 'xks', 199, 0, 0, 0, 0, NULL, 1, '2222222', '99', '2022-09-28 16:38:42', '222222222', '222222222', 11111.00, '', 'S-ZS-01-1111111111111');
+INSERT INTO `device` VALUES (11, 'sssssssss', 'xks', 199, 0, 0, 0, 0, 3, 1, '2222222', '99', '2022-09-28 16:38:42', '222222222', '222222222', 11111.00, '', 'S-ZS-01-1111111111111');
 INSERT INTO `device` VALUES (12, '2', '2', 19, 1, 0, 0, 0, 2, 1, '1-1-1', '台', '2022-09-28 16:57:23', 'xx', 'xx', 1000.00, '', 'S-ZS-01-3563463563436');
 INSERT INTO `device` VALUES (13, '1', '1', 16, 16, 0, 5, 3, 2, 1, '1-1-1', '台', '2022-09-28 17:46:52', 'xx', 'ww', 1.00, '', 'S-ZS-01-7826349827091');
 INSERT INTO `device` VALUES (14, 'kiki', 'kiki', 12, 0, 0, 8, 0, 2, 1, '11111', '台', '2022-10-15 14:36:40', '1111', '111111', 10000.00, '', 'S-ZS-01-2222222222222');
@@ -323,7 +332,7 @@ CREATE TABLE `device_status_record`  (
   `record_time` datetime NOT NULL COMMENT '记录时间',
   `record_person_id` int NOT NULL COMMENT '记录人id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = armscii8 COLLATE = armscii8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = armscii8 COLLATE = armscii8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of device_status_record
@@ -372,7 +381,7 @@ CREATE TABLE `device_temp`  (
   `device_id` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '相同名称相同规格的设备id',
   `document_id` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '入库单对应的单据id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '设备信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '设备信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of device_temp
@@ -412,7 +421,7 @@ CREATE TABLE `document_device`  (
   `descriptions` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '相关物品备注信息',
   `device_status` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '借用单或者归还单的物品状态',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 353 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '单据相关物品信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 359 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '单据相关物品信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of document_device
@@ -440,6 +449,9 @@ INSERT INTO `document_device` VALUES (344, 'CK204909565791', 'S-ZS-01-jjjjjjjjjj
 INSERT INTO `document_device` VALUES (347, 'CK20740498', 'S-ZS-01-jjjjjjjjjjjjj', 2, NULL, '');
 INSERT INTO `document_device` VALUES (352, 'CK21824', 'S-ZS-01-kkkkkkkkkkkkk', 3, NULL, '');
 INSERT INTO `document_device` VALUES (353, 'CK21824', 'S-ZS-01-2222222222222', 3, NULL, '');
+INSERT INTO `document_device` VALUES (357, 'JY2023022315165736', 'S-ZS-01-2222222222222', 1, NULL, '');
+INSERT INTO `document_device` VALUES (358, 'JY2023022315233657', 'S-ZS-01-kkkkkkkkkkkkk', 1, NULL, '');
+INSERT INTO `document_device` VALUES (364, 'CK111000', 'S-ZS-01-1111111111111', 8, NULL, '0');
 
 -- ----------------------------
 -- Table structure for document_status_description
@@ -477,7 +489,7 @@ CREATE TABLE `inout_warehouse_document`  (
   `description` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `buy_person_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 46 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '出入库单据表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 50 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '出入库单据表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of inout_warehouse_document
@@ -499,6 +511,7 @@ INSERT INTO `inout_warehouse_document` VALUES (43, 'CK204909544720', 1, 51, '202
 INSERT INTO `inout_warehouse_document` VALUES (44, 'CK204909565791', 1, 52, '2022-11-16 09:57:05', '1234', 0, 5, '', NULL);
 INSERT INTO `inout_warehouse_document` VALUES (45, 'CK20740498', 1, 51, '2022-11-16 10:15:14', '2222', 0, 5, '', NULL);
 INSERT INTO `inout_warehouse_document` VALUES (46, 'CK21824', 1, 51, '2022-11-24 14:56:29', 'test-print', 0, 5, '', NULL);
+INSERT INTO `inout_warehouse_document` VALUES (55, 'CK111000', 1, 51, '2022-05-07 10:51:11', '替换报废设备', 5, 1, '描述', NULL);
 
 -- ----------------------------
 -- Table structure for permission
@@ -529,7 +542,7 @@ CREATE TABLE `restock_document`  (
   `description` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `document_status` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of restock_document
@@ -548,7 +561,7 @@ CREATE TABLE `return_document`  (
   `return_person_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `description` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of return_document
@@ -606,7 +619,7 @@ CREATE TABLE `role_visible_range`  (
   `department` tinyint(1) NULL DEFAULT NULL COMMENT '是否可见部门审批表',
   `all` tinyint(1) NULL DEFAULT NULL COMMENT '是否可见全部审批表',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of role_visible_range
@@ -634,7 +647,7 @@ CREATE TABLE `scrap_document`  (
   `description` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `document_status` int NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '报废单据信息' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '报废单据信息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of scrap_document
@@ -650,7 +663,7 @@ CREATE TABLE `special_person`  (
   `user_id` int NOT NULL,
   `role_id` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of special_person
@@ -668,7 +681,7 @@ CREATE TABLE `sys_file`  (
   `size` bigint NOT NULL,
   `url` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_file
@@ -782,7 +795,7 @@ CREATE TABLE `user_role_system_department`  (
 -- ----------------------------
 -- Records of user_role_system_department
 -- ----------------------------
-INSERT INTO `user_role_system_department` VALUES (1, 1, 1, 1, 1);
+INSERT INTO `user_role_system_department` VALUES (1, 1, 1, 1, 2);
 INSERT INTO `user_role_system_department` VALUES (2, 2, 2, 1, 1);
 INSERT INTO `user_role_system_department` VALUES (3, 3, 2, 2, 1);
 INSERT INTO `user_role_system_department` VALUES (4, 3, 3, 1, 1);

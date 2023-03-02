@@ -92,4 +92,8 @@ public class InoutImpl implements InoutService {
     public Inout getInoutById(Integer id){
         return inoutMapper.getInoutById(id);
     }
+
+    public Integer get_category(String document_id) {
+        return(documentDeviceService.getcategory(document_id));
+    }
 }

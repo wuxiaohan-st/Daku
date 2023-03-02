@@ -31,4 +31,7 @@ public interface DocumentDeviceService {
 
     /**通过documentId获取deviceIds**/
     public List<DocumentDevice> getDeviceIdsByDocumentId(String document_id);
+
+    /**根据document_id 获取设备的category **/
+    public Integer getcategory(String document_id);
 }

@@ -38,4 +38,7 @@ public interface InoutService {
     /** 根据id查询out */
     public Inout getInoutById(Integer id);
 
+    /** 根据document_id 查询 device_category **/
+    public Integer get_category(String document_id);
+
 }

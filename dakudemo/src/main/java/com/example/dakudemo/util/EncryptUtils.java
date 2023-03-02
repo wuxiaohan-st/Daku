@@ -28,8 +28,8 @@ public class EncryptUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(EncryptUtils.getRandPassword());
-        System.out.println(EncryptUtils.encrypt("jyy", "123456"));
+//        System.out.println(EncryptUtils.getRandPassword());
+        System.out.println(EncryptUtils.encrypt("jgy", "123456"));
     }
 
     public static Integer getRandomInt(Integer min, Integer max){

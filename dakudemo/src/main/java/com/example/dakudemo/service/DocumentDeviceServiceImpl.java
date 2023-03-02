@@ -19,6 +19,8 @@ import java.util.List;
 public class DocumentDeviceServiceImpl implements DocumentDeviceService {
     @Autowired
     private DocumentDeviceMapper documentDeviceMapper;
+    @Autowired
+    private DeviceService deviceService;
 
     /**通过document_id 获取到设备相关信息，包括device_id和device_number**/
     public List<DocumentDevice> getDocumentDeviceInfo(String document_id){
@@ -54,5 +56,13 @@ public class DocumentDeviceServiceImpl implements DocumentDeviceService {
     /**通过documentId获取deviceIds**/
     public List<DocumentDevice> getDeviceIdsByDocumentId(String document_id){
         return documentDeviceMapper.getDeviceIdsByDocumentId(document_id);
+    }
+
+    public Integer getcategory(String document_id) {
+        List<DocumentDevice> document_device = getDocumentDeviceInfo(document_id);
+        String device_id = document_device.get(0).getDevice_id();
+        Device device  = deviceService.getDeviceInfoByDeviceId(device_id);
+        Integer category = device.getCategory_id();
+        return category;
     }
 }

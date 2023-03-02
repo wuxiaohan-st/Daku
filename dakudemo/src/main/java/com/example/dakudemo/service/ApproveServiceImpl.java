@@ -110,6 +110,15 @@ public class ApproveServiceImpl implements  ApproveService {
      * 根据前端传入的类型与设备列表
      */
     public Integer whatRealApproveType(Integer inputType, List<DocumentDevice> documentDeviceList) {
+//        DocumentDevice device1 = documentDeviceList.get(0);
+//        Device deviceInfo = deviceService.getDeviceInfoByDeviceId(device1.getDevice_id());
+////        Integer category_type = inoutService.get_category(inout.getDocument_id());
+//        Integer category_type = deviceInfo.getCategory_id();
+//
+//        //根据类别判断流程
+//        if(category_type == 3)
+//            return 5;
+
         if (inputType == 0) {
             return 0; //如果为计划内直接不算了
         }
@@ -181,7 +190,7 @@ public class ApproveServiceImpl implements  ApproveService {
             VisibleRange visibleRange = approveMapper.getVisibleRangeByRoleId(role.getId());
             // 获取角色对应审批流程
             List<ApproveProcess> approveProcessList = approveMapper.getApproveProcessByRoleId(role.getId());
-            // 获取审批人的系统和部门
+            //            // 获取审批人的系统和部门
             Integer approver_system_id = role.getSystem_id();
             Integer approver_department_id = role.getDepartment_id();
             // 遍历审批节点

@@ -96,7 +96,25 @@ public class UserController {
             return resultTemp;
         }
         // 逻辑结束
-        Integer realApproveType = approveService.whatRealApproveType(inout.getApprove_type(), inout.getDocumentDeviceList());
+        //获取单据的内容分类信息
+        List<DocumentDevice> devices = inout.getDocumentDeviceList();
+        if(ObjectUtils.isEmpty(devices)){
+            result.setIsSuccess(false);
+            result.setCode(-1);
+            result.setMsg("该单据无任何设备信息！");
+            return result;
+        }
+        DocumentDevice device1 = devices.get(0);
+        Device deviceInfo = deviceService.getDeviceInfoByDeviceId(device1.getDevice_id());
+        Integer category_type = deviceInfo.getCategory_id();
+        Integer realApproveType;
+        //根据类别判断流程
+        if(category_type == 3)
+            realApproveType = 5;
+        else
+            realApproveType = approveService.whatRealApproveType(inout.getApprove_type(), devices);
+
+
         for(DocumentDevice documentDevice: inout.getDocumentDeviceList()){
             if(!inout.getDocument_id().equals(documentDevice.getDocument_id())){
                 isSuccess = Boolean.FALSE;
@@ -144,7 +162,24 @@ public class UserController {
             return resultTemp;
         }
         // 逻辑结束
-        Integer realApproveType = approveService.whatRealApproveType(inout.getApprove_type(), inout.getDocumentDeviceList());
+        //获取单据的内容分类信息
+        List<DocumentDevice> devices = inout.getDocumentDeviceList();
+        if(ObjectUtils.isEmpty(devices)){
+            result.setIsSuccess(false);
+            result.setCode(-1);
+            result.setMsg("该单据无任何设备信息！");
+            return result;
+        }
+        DocumentDevice device1 = devices.get(0);
+        Device deviceInfo = deviceService.getDeviceInfoByDeviceId(device1.getDevice_id());
+        Integer category_type = deviceInfo.getCategory_id();
+        Integer realApproveType;
+        //根据类别判断流程
+        if(category_type == 3)
+            realApproveType = 5;
+        else
+            realApproveType = approveService.whatRealApproveType(inout.getApprove_type(), devices);
+
         inout.setApprove_type(realApproveType);
         boolean isSuccess = true;
         if (inout.getDocument_status().equals(1)){

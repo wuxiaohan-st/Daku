@@ -40,6 +40,9 @@ public class ApproveController {
     private UserService userService;
 
     @Autowired
+    private DeviceService deviceService;
+
+    @Autowired
     private ApproveService approveService;
 
     @Autowired
@@ -146,6 +149,7 @@ public class ApproveController {
         String documentIdOfDoc = null; // 文档关联文档id，只有documentLogicType=1才有意义
         // 判断用户是否是单据提交者
         if (docType.equals(1)){
+            /* 出库单/领用单 */
             List<Inout> inoutList = inoutService.getOutListParams(document_id, null, user.getId(), null);
             if (ObjectUtils.isEmpty(inoutList)){
                 result.setIsSuccess(false);
@@ -173,9 +177,24 @@ public class ApproveController {
 //            }
             // 逻辑结束
             isSuccess =  inoutService.updateOut(inout);
-
+            //获取单据的内容分类信息
+            List<DocumentDevice> devices = inout.getDocumentDeviceList();
+            if(ObjectUtils.isEmpty(devices)){
+                result.setIsSuccess(false);
+                result.setCode(-1);
+                result.setMsg("该单据无任何设备信息！");
+                return result;
+            }
+            //获取单据的内容分类信息
+            DocumentDevice device1 = devices.get(0);
+            Device deviceInfo = deviceService.getDeviceInfoByDeviceId(device1.getDevice_id());
+            Integer category_type = deviceInfo.getCategory_id();
+            //根据类别判断流程
             approveType = inout.getApprove_type();
-            realApproveType = approveService.whatRealApproveType(inout.getApprove_type(), inout.getDocumentDeviceList());
+            if(category_type == 3)
+                realApproveType = 5;
+            else
+                realApproveType = approveService.whatRealApproveType(inout.getApprove_type(), devices);
         }else if (docType.equals(2)){
             List<Lend> lendList = lendService.getLendList(document_id, user.getId(), null);
             if (ObjectUtils.isEmpty(lendList)){
