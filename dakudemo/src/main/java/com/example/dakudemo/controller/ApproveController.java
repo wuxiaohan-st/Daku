@@ -196,6 +196,7 @@ public class ApproveController {
             else
                 realApproveType = approveService.whatRealApproveType(inout.getApprove_type(), devices);
         }else if (docType.equals(2)){
+            //借用单
             List<Lend> lendList = lendService.getLendList(document_id, user.getId(), null);
             if (ObjectUtils.isEmpty(lendList)){
                 result.setIsSuccess(false);
@@ -224,7 +225,8 @@ public class ApproveController {
             isSuccess = lendService.updateLend(lend);
 
             approveType = lend.getApprove_type();
-            realApproveType = approveService.whatRealApproveType(lend.getApprove_type(), lend.getDocumentDeviceList());
+            realApproveType = 6;
+            //realApproveType = approveService.whatRealApproveType(lend.getApprove_type(), lend.getDocumentDeviceList());
         }else if (docType.equals(3)) {
             // 入库单
             List<Inout> inoutList = inoutService.getInListParams(document_id, null, null, user.getId());
@@ -499,6 +501,17 @@ public class ApproveController {
         if (addDocInfo){
             approveList = approveService.addDocInfoForApproves(approveList);
         }
+        for(Approve approve1 : approveList){
+            String document_id = approve1.getDocument_id();
+            if(approve1.getDocument_type().equals(1)){
+                List<Inout> outlist = inoutService.getOutListParams(document_id,null,null,null);
+                String cost_id = outlist.get(0).getCost_id();
+                if("".equals(cost_id))
+                    continue;
+                else
+                    approve1.setCost_id(cost_id);
+            }
+        }
         return approveList;
     }
 
@@ -522,7 +535,21 @@ public class ApproveController {
             approveList = approveService.addDocInfoForApproves(approveList);
         }
 
-        return approveList;
+        for(Approve approve1 : approveList) {
+            String document_id = approve1.getDocument_id();
+            if (approve1.getDocument_type().equals(1)) {
+                List<Inout> outlist = inoutService.getOutListParams(document_id, null, null, null);
+                String cost_id = outlist.get(0).getCost_id();
+                if ("".equals(cost_id))
+                    continue;
+                else
+                    approve1.setCost_id(cost_id);
+            }
+        }
+
+
+
+            return approveList;
     }
 
     @ApiOperation("审批人获取审批链条")

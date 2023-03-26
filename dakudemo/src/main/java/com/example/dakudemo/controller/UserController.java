@@ -131,7 +131,7 @@ public class UserController {
 
         //ApproveProcess approveProcess = approveService.getFirstApproveProcessByApproveType(realApproveType);
         if (inout.getDocument_status().equals(1)){
-            /* 11月更新 不再延续之前的流程 直接从头开始 */
+            /* 11月更新 不再延续之前的流程 直接从 头开始 */
 //            ApproveProcess approveProcess = approveService.getNextApproveProcessByUserIdAndApproveType(inout.getUser_id(), inout.getApprove_type(), inout.getSystem_id());
             ApproveProcess approveProcess = approveService.getFirstApproveProcessByApproveType(realApproveType);
             isSuccess = isSuccess && approveService.addNextLevelApprove(inout.getDocument_id(), inout.getUser_id(), inout.getSystem_id(),realApproveType, 1, approveProcess.getApprove_node());
@@ -170,6 +170,7 @@ public class UserController {
             result.setMsg("该单据无任何设备信息！");
             return result;
         }
+
         DocumentDevice device1 = devices.get(0);
         Device deviceInfo = deviceService.getDeviceInfoByDeviceId(device1.getDevice_id());
         Integer category_type = deviceInfo.getCategory_id();
@@ -250,7 +251,8 @@ public class UserController {
         }
         // 逻辑结束
 
-        Integer realApproveType = approveService.whatRealApproveType(lend.getApprove_type(), lend.getDocumentDeviceList());
+        Integer realApproveType = 6;
+        //Integer realApproveType = approveService.whatRealApproveType(lend.getApprove_type(), lend.getDocumentDeviceList());
         for(DocumentDevice documentDevice: lend.getDocumentDeviceList()){
             if(!lend.getDocument_id().equals(documentDevice.getDocument_id())){
                 isSuccess = Boolean.FALSE;
@@ -309,7 +311,8 @@ public class UserController {
             return resultTemp;
         }
         // 逻辑结束
-        Integer realApproveType = approveService.whatRealApproveType(lend.getApprove_type(), lend.getDocumentDeviceList());
+        Integer realApproveType = 6;
+        //Integer realApproveType = approveService.whatRealApproveType(lend.getApprove_type(), lend.getDocumentDeviceList());
         lend.setApprove_type(realApproveType);
         boolean isSuccess = true;
         if (lend.getDocument_status().equals(1)){

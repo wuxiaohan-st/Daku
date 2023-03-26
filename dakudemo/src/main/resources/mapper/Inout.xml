@@ -67,10 +67,11 @@
     </select>
 
     <insert id="addOut" parameterType="com.example.dakudemo.entity.Inout" >
-        insert into daku.inout_warehouse_document(document_id, document_category_id, buy_use_person_id, buy_use_time, buy_use_reason, approve_type, document_status,description) values
+        insert into daku.inout_warehouse_document(document_id, document_category_id,cost_id, buy_use_person_id, buy_use_time, buy_use_reason, approve_type, document_status,description) values
         (
             #{document_id},
             #{document_category_id},
+            #{cost_id},
             #{buy_use_person_id},
             #{buy_use_time},
             #{buy_use_reason},
@@ -93,7 +94,7 @@
     </update>
 
     <select id="getOutListParams"  resultType="com.example.dakudemo.entity.Inout">
-        SELECT id,document_id,document_category_id,buy_use_person_id,buy_use_time,buy_use_reason,approve_type,document_status,description FROM daku.inout_warehouse_document
+        SELECT id,document_id,cost_id,document_category_id,buy_use_person_id,buy_use_time,buy_use_reason,approve_type,document_status,description FROM daku.inout_warehouse_document
         WHERE 1 = 1
         <if test="document_id != null and document_id !=''">
             and document_id = #{document_id}

@@ -1,0 +1,29 @@
+{
+	"info": {
+		"_postman_id": "66c52d0b-7edf-487f-bd8d-491b55278847",
+		"name": "审核链条",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "经管员",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8989/daku/approve/getApproveChainByDocIdAndApproverId",
+					"host": [
+						"localhost"
+					],
+					"port": "8989",
+					"path": [
+						"daku",
+						"approve",
+						"getApproveChainByDocIdAndApproverId"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

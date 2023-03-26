@@ -1,0 +1,304 @@
+{
+	"info": {
+		"_postman_id": "046ddb7c-18cf-40fb-aa4f-2a3e474c12ab",
+		"name": "process test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "lend",
+			"item": [
+				{
+					"name": "check",
+					"item": [
+						{
+							"name": "经管员",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "出库单（材料类）",
+			"item": [
+				{
+					"name": "addout",
+					"item": [
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "check",
+					"item": [
+						{
+							"name": "经管员",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkYWt1IiwiZXhwIjoxNjgwMTkyNDU2LCJJUEFkZHJlc3MiOiIxMTQuMjE0LjE2OC4xMjEiLCJpYXQiOjE2Nzk1ODc2NTYsInVzZXJuYW1lIjoiamd5In0.m1YfDtRRzNlHjaE1XyTOsCqzi8hpnP0_J9nHM_shgDk",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "localhost:8989/daku/approve/getApproverCurrentApproves",
+									"host": [
+										"localhost"
+									],
+									"port": "8989",
+									"path": [
+										"daku",
+										"approve",
+										"getApproverCurrentApproves"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "useid：51",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "审批",
+					"item": [
+						{
+							"name": "经管员审批",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8989/daku/approve/approveIt",
+									"host": [
+										"localhost"
+									],
+									"port": "8989",
+									"path": [
+										"daku",
+										"approve",
+										"approveIt"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "change status",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"item": [
+				{
+					"name": "roleid = 1 用户",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"chh\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8989/daku/public/loginJWT",
+							"host": [
+								"localhost"
+							],
+							"port": "8989",
+							"path": [
+								"daku",
+								"public",
+								"loginJWT"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "roleid = 2 用户",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"zhx\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8989/daku/public/loginJWT",
+							"host": [
+								"localhost"
+							],
+							"port": "8989",
+							"path": [
+								"daku",
+								"public",
+								"loginJWT"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "roleid = 3 用户",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"ztz\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8989/daku/public/loginJWT",
+							"host": [
+								"localhost"
+							],
+							"port": "8989",
+							"path": [
+								"daku",
+								"public",
+								"loginJWT"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "roleid = 9 经管员",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"jgy\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8989/daku/public/loginJWT",
+							"host": [
+								"localhost"
+							],
+							"port": "8989",
+							"path": [
+								"daku",
+								"public",
+								"loginJWT"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userid：51 roleid：1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"mhp\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8989/daku/public/loginJWT",
+							"host": [
+								"localhost"
+							],
+							"port": "8989",
+							"path": [
+								"daku",
+								"public",
+								"loginJWT"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

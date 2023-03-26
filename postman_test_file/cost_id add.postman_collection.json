@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "4b30d338-111e-4331-b3fd-e605cd36e303",
+		"name": "cost_id add",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"document_id\":\"CK20230322584\",\r\n    \"document_category_id\": 1,\r\n    \"buy_use_person_id\": 51\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8989/daku/user/outList",
+					"host": [
+						"localhost"
+					],
+					"port": "8989",
+					"path": [
+						"daku",
+						"user",
+						"outList"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

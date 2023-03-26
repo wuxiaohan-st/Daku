@@ -56,7 +56,7 @@
                 and device_id = #{device_id}
             </if>
             <if test="name != null and name !=''">
-                 and name = #{name}
+                 and name like '%${name}%'
             </if>
             <if test="category_id != null and category_id !=''">
                  and category_id = #{category_id}

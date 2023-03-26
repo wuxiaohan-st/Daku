@@ -569,7 +569,7 @@ public class ApproveServiceImpl implements  ApproveService {
 
     /**
      * 更新库存（自动判断）
-     * 1:领用单
+     * 1:出库单
      * 2:借用单
      * 3:入库单
      * 4:归还单
@@ -899,6 +899,9 @@ public class ApproveServiceImpl implements  ApproveService {
             approve.setApprover_name(approver_name);
             String system_name = approveMapper.getSysNameBySysId(approve.getSystem_id());
             approve.setSystem_name(system_name);
+            Integer department_id = approveMapper.getDepartmentIdBySysId(approve.getSystem_id());
+            String department_name = approveMapper.getDepartmentNameByDepartmentId(department_id);
+            approve.setDepartment_name(department_name);
         });
         return approveList;
     }
@@ -952,7 +955,8 @@ public class ApproveServiceImpl implements  ApproveService {
 
     /** 根据user_id 获取roles */
     public List<Role> getRolesByUserId(Integer user_id){
-        return approveMapper.getRolesByUserId(user_id);
+        List<Role> R = approveMapper.getRolesByUserId(user_id);
+        return R;
     }
 
     /** 查询文件状态描述 */

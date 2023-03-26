@@ -27,8 +27,10 @@ public class Approve {
     private String approve_suggestion;
 
     private String user_name;
+    private String cost_id;
     private String approver_name;
     private String system_name;
+    private String department_name;
     private Inout inout;
     private Lend lend;
     private Repair repair;

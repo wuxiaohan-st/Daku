@@ -1,0 +1,7 @@
+多余的表：
+device_status_record ?
+device_status_reord
+device_temp
+document_archiver ?
+permission ?
+user_role

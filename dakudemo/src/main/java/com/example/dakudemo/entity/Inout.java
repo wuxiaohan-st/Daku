@@ -18,6 +18,7 @@ import java.util.List;
 public class Inout extends DeviceDocument{
     private Integer id;
     private String document_id;
+    private String cost_id;
     private Integer document_category_id;
     private Integer buy_use_person_id;
     private String buy_use_time;
@@ -54,10 +55,11 @@ public class Inout extends DeviceDocument{
         this.buy_person_name = buy_person_name;
     }
     // 出库单数据库查询构造
-    public Inout(Integer id,String document_id, Integer document_category_id, Integer buy_use_person_id, String buy_use_time, String buy_use_reason, Integer approve_type,Integer document_status, String description) {
+    public Inout(Integer id,String document_id,String cost_id, Integer document_category_id, Integer buy_use_person_id, String buy_use_time, String buy_use_reason, Integer approve_type,Integer document_status, String description) {
         this.id = id;
         this.document_id = document_id;
         super.setDocument_id(document_id);
+        this.cost_id = cost_id;
         this.document_category_id = document_category_id;
         this.buy_use_person_id = buy_use_person_id;
         super.setUser_id(buy_use_person_id);
@@ -68,9 +70,10 @@ public class Inout extends DeviceDocument{
         this.description = description;
     }
 
-    public Inout(String document_id, Integer document_category_id, Integer buy_use_person_id, String buy_use_time, String buy_use_reason, Integer approve_type, Integer document_status, String description) {
+    public Inout(String document_id,String cost_id, Integer document_category_id, Integer buy_use_person_id, String buy_use_time, String buy_use_reason, Integer approve_type, Integer document_status, String description) {
         this.document_id = document_id;
         super.setDocument_id(document_id);
+        this.cost_id = cost_id;
         this.document_category_id = document_category_id;
         this.buy_use_person_id = buy_use_person_id;
         super.setUser_id(buy_use_person_id);
@@ -81,9 +84,10 @@ public class Inout extends DeviceDocument{
         this.description = description;
     }
     // 出库单前端传入构造函数
-    public Inout(String document_id, Integer document_category_id, Integer buy_use_person_id, String buy_use_time, String buy_use_reason, Integer approve_type, Integer document_status,String description, Integer system_id, List<DocumentDevice> documentDeviceList) {
+    public Inout(String document_id,String cost_id, Integer document_category_id, Integer buy_use_person_id, String buy_use_time, String buy_use_reason, Integer approve_type, Integer document_status,String description, Integer system_id, List<DocumentDevice> documentDeviceList) {
         this.document_id = document_id;
         super.setDocument_id(document_id);
+        this.cost_id = cost_id;
         this.document_category_id = document_category_id;
         this.buy_use_person_id = buy_use_person_id;
         super.setUser_id(buy_use_person_id);

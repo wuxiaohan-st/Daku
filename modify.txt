@@ -1,0 +1,12 @@
+3,23
+inout表新增cost_list,同时为此修改/daku/user/outList和/daku/user/addOut接口
+3,24
+修改
+/daku/approve/getApproverCurrentApproves 和
+daku/approve/getApproverProcessedApproves接口，
+使返回的出库表审批信息中含cost_id。
+数据库中CK2023032132方便测试增cost_id
+新增postman测试文件。
+
+3.26
+新增getdevicelist的这个name字段模糊查询
